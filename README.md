@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Image Recognition
 
-## Getting Started
+Educational project for Numerical Calculus course. Implements object recognition using Euclidean distance between image vectors.
 
-First, run the development server:
+## Description
+
+This application identifies objects (cup, pencil, mouse) in uploaded images using a purely numerical approach:
+
+1. **Image Vectorization**: Each image is resized to 100×100 pixels, converted to grayscale, and represented as a vector of 10,000 numbers.
+2. **Euclidean Distance**: Compares the input image vector against reference vectors using the formula:
+   ```
+   d = √(Σ(xi - yi)²)
+   ```
+3. **Classification**: Selects the reference with minimum distance. If distance > 5000, returns "unidentified".
+
+### Method
+
+- **No AI/ML**: Pure mathematical approach using linear algebra
+- **Technology**: Next.js, TypeScript, Sharp (image processing)
+- **References**: 5 images per object (15 total)
+
+## Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Usage
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Development
+```bash
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open [http://localhost:3000](http://localhost:3000)
 
-## Learn More
+### Production Build
+```bash
+npm run build
+npm start
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+src/
+├── app/
+│   ├── actions/
+│   │   └── identifyObject.ts    # Server Action
+│   └── page.tsx                 # UI
+└── lib/
+    ├── imageMath.ts             # Euclidean distance
+    ├── serverImageUtils.ts      # Image processing (Sharp)
+    ├── referenceObjects.ts      # Reference loading
+    └── imageClassifier.ts       # Classification logic
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Author
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Miguel Pinero
